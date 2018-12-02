@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Moment from 'moment';
 export default class Message extends Component {
   render() {
-    const { name, message } = this.state;
+    Moment.locale('ru');
     return (
-      <div className="newline">
-        <div className="message">
-          <div className="message_content">
-            <b>{this.props.name}</b>: {this.props.message}
-          </div>
-          <div className="message_created_at">
-            {this.props.created_at}
-          </div>
-        </div>
+      <div className="message">
+        <b>{this.props.name}</b>
+        (
+            {Moment(this.props.created_at).format('DD.MM.YYYY HH:mm')}
+        ): {this.props.message}
       </div>
     );
   }

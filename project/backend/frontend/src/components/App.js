@@ -13,10 +13,6 @@ const App = () => (
     <div className="center">
       <MessageList endpoint="api/v0/messages/" />
     </div>
-    <div className="center">
-      <DataProvider endpoint="api/v0/messages/"
-                    render={data => <Table data={data} />} />
-    </div>
   </React.Fragment>
 );
 const wrapper = document.getElementById("app");

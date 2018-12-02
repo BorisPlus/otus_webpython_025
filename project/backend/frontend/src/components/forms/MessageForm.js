@@ -6,11 +6,15 @@ export default class MessageForm extends Component {
   };
   state = {
     name: "",
-    message: ""
+    message: "",
+    valid: false
   };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+  componentWillUpdate(nextProps, nextState) {
+    nextState.valid = nextState.name && nextState.message;
+  }
   handleSubmit = e => {
     e.preventDefault();
     const { name, message } = this.state;
@@ -50,6 +54,7 @@ export default class MessageForm extends Component {
                 required
               />
               <input
+                disabled={!this.state.valid}
                 className="submit"
                 type="submit"
                 name="submit"

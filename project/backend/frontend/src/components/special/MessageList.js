@@ -1,45 +1,48 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Message from "./Message";
+import key from "weak-key";
 export default class MessageList extends Component {
   static propTypes = {
     endpoint: PropTypes.string.isRequired
   };
   state = {
-      messages: [],
+      data: [],
       loaded: false,
       placeholder: "Loading..."
   };
   loadDataFromServer(component) {
-        fetch(component.props.endpoint)
-        .then(response => {
-            if (response.status !== 200) {
-              return component.setState({ placeholder: "Something went wrong" });
-            }
-            return response.json();
-        })
-      .then(data => component.setState({ messages: messages, loaded: true }));
-    }
-    componentDidMount() {
-        this.loadDataFromServer(this);
-        setInterval(this.loadDataFromServer.bind(null, this), 5000);
-    }
+    fetch(component.props.endpoint)
+    .then(response => {
+      if (response.status !== 200) {
+        return component.setState({ placeholder: response.status });
+      }
+      return response.json();
+    })
+    .then(messages => component.setState({ messages: messages, loaded: true }));
+  }
+
+  componentDidMount() {
+    this.loadDataFromServer(this);
+    setInterval(this.loadDataFromServer.bind(null, this), 5000);
+  }
   render() {
     const { messages, loaded, placeholder } = this.state;
     if (!loaded) {
-        return <p>{placeholder}</p>;
+      return <p>{placeholder}</p>;
     }
     if (loaded && messages.length === 0) {
-        return <p>Nothing to show</p>;
+      return <p>Nothing to show</p>;
     }
-    const messages_obj = this.props.messages.map((message) =>
-         <Message name={message.name}
-                message={message.message}
-                created_at={message.created_at} />
-      );
-    return
-        <div>
-            {messages_obj}
-        </div>;
+    const messages_obj = messages.map((message) =>
+      <div key={key(message)}>
+        <Message name={message.name} message={message.message} created_at={message.created_at} />
+      </div>
+    );
+    return (
+      <div className="messages">
+        {messages_obj}
+      </div>
+    );
   }
 }
