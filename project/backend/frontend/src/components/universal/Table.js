@@ -5,7 +5,7 @@ const Table = ({ data }) =>
   !data.length ? (
     <p>Nothing to show</p>
   ) : (
-    <div className="column">
+    <div className="newline">
       <h2 className="subtitle">
         Showing <strong>{data.length} items</strong>
       </h2>

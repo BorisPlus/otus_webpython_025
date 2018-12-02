@@ -1,15 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import DataProvider from "./DataProvider";
-import Table from "./Table";
-import Form from "./Form";
-import WhatIsTheTimeNow from "./WhatIsTheTimeNow";
+import DataProvider from "./universal/DataProvider";
+import Table from "./universal/Table";
+import MessageForm from "./forms/MessageForm";
+import MessageList from "./special/MessageList";
+import WhatIsTheTimeNow from "./features/WhatIsTheTimeNow";
 const App = () => (
   <React.Fragment>
-    <DataProvider endpoint="api/v0/messages/"
-                render={data => <Table data={data} />} />
-    <Form endpoint="api/v0/messages/" />
-    <WhatIsTheTimeNow />
+    <div className="center">
+      <MessageForm endpoint="api/v0/messages/" />
+    </div>
+    <div className="center">
+      <MessageList endpoint="api/v0/messages/" />
+    </div>
+    <div className="center">
+      <DataProvider endpoint="api/v0/messages/"
+                    render={data => <Table data={data} />} />
+    </div>
   </React.Fragment>
 );
 const wrapper = document.getElementById("app");

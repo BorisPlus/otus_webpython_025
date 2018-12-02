@@ -21,5 +21,5 @@ class WhatIsTheTimeNow extends Component {
           </div>
         );
       }
-    };
+};
 export default WhatIsTheTimeNow;

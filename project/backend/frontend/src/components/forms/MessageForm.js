@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-class Form extends Component {
+export default class MessageForm extends Component {
   static propTypes = {
     endpoint: PropTypes.string.isRequired
   };
@@ -22,47 +22,42 @@ class Form extends Component {
     };
     fetch(this.props.endpoint, conf)
     .then(response => console.log(response))
-    .then(() => this.setState({ name: "", message: "" }));
+    .then(() => this.setState({ name: this.state.name, message: "" }));
   };
   render() {
     const { name, message } = this.state;
     return (
-      <div className="column">
+      <div className="newline">
+      <div className="form">
+
         <form onSubmit={this.handleSubmit}>
-          <div className="field">
-            <label className="label">Name</label>
-            <div className="control">
               <input
                 className="input"
                 type="text"
                 name="name"
+                placeholder="Enter your nickname"
                 onChange={this.handleChange}
                 value={name}
                 required
               />
-            </div>
-          </div>
-          <div className="field">
-            <label className="label">Message</label>
-            <div className="control">
-              <textarea
-                className="textarea"
+              <input
+                className="input"
                 type="text"
                 name="message"
+                placeholder="Enter new message here"
                 onChange={this.handleChange}
                 value={message}
                 required
               />
-            </div>
-          </div>
-          <div className="control">
-            <button type="submit" className="button is-info">
-              Send message
-            </button>
-          </div>
+              <input
+                className="submit"
+                type="submit"
+                name="submit"
+                value="Send"
+              />
         </form>
+      </div>
       </div>
     );
   }
 }
-export default Form;

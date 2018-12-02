@@ -6,3 +6,6 @@ NO.*
 TMP.*
 gitignore/
 .idea/
+
+# React
+node_modules/
