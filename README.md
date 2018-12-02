@@ -4,6 +4,11 @@ Django + React
 
 ## Проверка работоспособности
 
+```
+cd project/backend/
+npm run dev && python3 manage.py runserver
+```
+
 В процессе:
 * http://127.0.0.1:8000/
 * http://127.0.0.1:8000/api/v0/
