@@ -6,4 +6,9 @@ from . import models
 
 @admin.register(models.Message)
 class MessageAdminModel(admin.ModelAdmin):
-    pass
+    list_display = (
+        'id',
+        'created_at',
+        'name',
+        'message'
+    )
