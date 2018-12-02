@@ -32,7 +32,7 @@ export default class MessageList extends Component {
       return <p>{placeholder}</p>;
     }
     if (loaded && messages.length === 0) {
-      return <p>Nothing to show</p>;
+      return <p>chat is empty</p>;
     }
     const messages_obj = messages.map((message) =>
       <div key={key(message)}>
