@@ -7,7 +7,10 @@ export default class MessageForm extends Component {
   state = {
     name: "",
     message: "",
-    valid: false
+    valid: false,
+    sending: false,
+    last_response_status_ok: true,
+    last_response_status_text: null,
   };
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -17,6 +20,7 @@ export default class MessageForm extends Component {
   }
   handleSubmit = e => {
     e.preventDefault();
+    this.setState({ sending: true });
     const { name, message } = this.state;
     const flood = { name, message };
     const conf = {
@@ -25,7 +29,15 @@ export default class MessageForm extends Component {
       headers: new Headers({ "Content-Type": "application/json" })
     };
     fetch(this.props.endpoint, conf)
-    .then(response => console.log(response))
+    .then(response => {
+        if (response.status) {
+            this.setState({
+                sending: false,
+                last_response_status_ok: response.ok,
+                last_response_status_text: response.statusText,
+            });
+        }
+    })
     .then(() => this.setState({ name: this.state.name, message: "" }));
   };
   render() {
@@ -33,33 +45,33 @@ export default class MessageForm extends Component {
     return (
       <div className="newline">
       <div className="form">
-
+        {this.state.last_response_status_ok  ? null : <label class="error"> {this.state.last_response_status_text} </label> }
         <form onSubmit={this.handleSubmit}>
-              <input
-                className="input"
-                type="text"
-                name="name"
-                placeholder="Enter your nickname"
-                onChange={this.handleChange}
-                value={name}
-                required
-              />
-              <input
-                className="input"
-                type="text"
-                name="message"
-                placeholder="Enter new message here"
-                onChange={this.handleChange}
-                value={message}
-                required
-              />
-              <input
-                disabled={!this.state.valid}
-                className="submit"
-                type="submit"
-                name="submit"
-                value="Send"
-              />
+          <input
+            className="input"
+            type="text"
+            name="name"
+            placeholder="Enter your nickname"
+            onChange={this.handleChange}
+            value={name}
+            required
+          />
+          <input
+            className="input"
+            type="text"
+            name="message"
+            placeholder="Enter new message here"
+            onChange={this.handleChange}
+            value={message}
+            required
+          />
+          <input
+            disabled={!this.state.valid || this.state.sending}
+            className="submit"
+            type="submit"
+            name="submit"
+            value={this.state.sending ? "Sending..." : "To send"}
+          />
         </form>
       </div>
       </div>
