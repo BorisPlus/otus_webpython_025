@@ -32,11 +32,10 @@ export default class MessageForm extends Component {
     .then(
       response => {
         if (response.status) {
-            alert(response.status);
             this.setState({
                 sending: false,
                 last_response_status_ok: response.ok,
-                last_response_status_text: response.statusText,
+                last_response_status_text: response.statusText
             });
             if (response.ok) {
                 this.setState({ name: this.state.name, message: "" });
@@ -46,7 +45,7 @@ export default class MessageForm extends Component {
       error => {
         this.setState({
             name: this.state.name,
-            message: this.state.message,
+            message: this.state.message
         });
         setTimeout(() => {
             this.setState({
