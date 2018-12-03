@@ -32,14 +32,15 @@ export default class MessageForm extends Component {
     .then(
       response => {
         if (response.status) {
+            alert(response.status);
             this.setState({
                 sending: false,
                 last_response_status_ok: response.ok,
                 last_response_status_text: response.statusText,
             });
-        }
-        if (response.ok) {
-            this.setState({ name: this.state.name, message: "" })
+            if (response.ok) {
+                this.setState({ name: this.state.name, message: "" });
+            }
         }
       },
       error => {
@@ -62,7 +63,7 @@ export default class MessageForm extends Component {
     return (
       <div className="newline">
       <div className="form">
-        {this.state.last_response_status_ok  ? null : <div class="error"> <b>Send error:</b> {this.state.last_response_status_text} </div> }
+        {this.state.last_response_status_ok  ? null : <div className="error"> <b>Send error:</b> {this.state.last_response_status_text} </div> }
         <form onSubmit={this.handleSubmit}>
           <input
             className="input"
