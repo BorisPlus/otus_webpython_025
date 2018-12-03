@@ -1,17 +1,32 @@
 # otus_webpython_025
 
-Django + React
+Simple flood chat = Django + React
+
 
 ## Проверка работоспособности
 
+См. GIF-анимацию:
+<kbd>![react_posting.png](README.files/img/screencasts/react_posting.gif)</kbd>
+
 ```
 cd project/backend/
+
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py loaddata messages
 npm run dev && python3 manage.py runserver
+
 ```
 
 В процессе:
 * http://127.0.0.1:8000/
 * http://127.0.0.1:8000/api/v0/
+
+Почему-то это приводит взаимодействие с SQLite к 'Send error: Forbidden'
+```
+python3 manage.py createsuperuser --username=admin --email=admin@admin.admin
+```
+
 * http://127.0.0.1:8000/admin/
 
 
