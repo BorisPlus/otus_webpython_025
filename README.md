@@ -20,7 +20,7 @@ npm run dev && python3 manage.py runserver
 
 В процессе:
 * http://127.0.0.1:8000/
-* http://127.0.0.1:8000/api/v0/
+* http://127.0.0.1:8000/api/v0/messages/
 
 Почему-то это приводит взаимодействие с SQLite к 'Send error: Forbidden'
 ```
