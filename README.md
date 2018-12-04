@@ -32,6 +32,7 @@ python3 manage.py createsuperuser --username=admin --email=admin@admin.admin
 
 ## Авторы
 
+* https://www.valentinog.com/blog/tutorial-api-django-rest-react/
 * **BorisPlus** - [https://github.com/BorisPlus/otus_webpython_025](https://github.com/BorisPlus/otus_webpython_025)
 
 ## Лицензия
